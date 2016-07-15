@@ -16,13 +16,9 @@ Generate an .babelrc file for [babel](https://babeljs.io/) in the current workin
   * [Install locally](#install-locally)
   * [Use as a plugin](#use-as-a-plugin)
   * [Register as a generator](#register-as-a-generator)
-- [Running multiple generators](#running-multiple-generators)
-  * [generate-install](#generate-install)
-  * [generate-dest](#generate-dest)
 - [Customization](#customization)
   * [Destination directory](#destination-directory)
   * [Overriding templates](#overriding-templates)
-- [Next steps](#next-steps)
 - [About](#about)
   * [Related projects](#related-projects)
   * [Contributing](#contributing)
@@ -225,26 +221,6 @@ module.exports = function(app) {
 
 Visit the [generator docs](https://github.com/generate/generate/blob/master/docs/generators.md) to learn more about creating, installing, using and publishing generators.
 
-## Running multiple generators
-
-Generate supports running multiple generators at once. Here are some examples of other generators that work well with `generate-babelrc`.
-
-### generate-install
-
-Run [generate-install](https://github.com/generate/generate-install) **after** this generator to prompt to install any `dependencies` or `devDependencies` necessary for the generated files.
-
-**Example**
-
-![generate-babelrc generate-install example](https://raw.githubusercontent.com/pointnet/generate-babelrc/master/docs/demo-install.gif)
-
-### generate-dest
-
-Run [generate-dest](https://github.com/generate/generate-dest) **before** this generator to prompt for the destination directory to use for generated files.
-
-**Example**
-
-![generate-babelrc generate-dest example](https://raw.githubusercontent.com/pointnet/generate-babelrc/master/docs/demo-dest.gif)
-
 ## Customization
 
 The following instructions can be used to override settings in `generate-babelrc`. Visit the [Generate documentation](https://github.com/generate/generate/blob/master/docs/overriding-defaults.md) to learn about other ways to override defaults.
@@ -264,12 +240,6 @@ $ gen dest babelrc
 You can override a template by adding a template of the same name to the `templates` directory in user home.
 
 For example, to override the `foo.tmp` template, add a template at the following path `~/generate/generate-babelrc/templates/foo.tmpl`, where `~/` is the user-home directory that `os.homedir()` resolves to on your system.
-
-## Next steps
-
-* [docs.md](docs.md): additional documentation for this generator
-* [Generate documentation](https://github.com/generate/generate/blob/master/docs/): visit the Generate docs
-* [Generate repo](https://github.com/generate/generate): visit the Generate repository
 
 ## About
 

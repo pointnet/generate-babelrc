@@ -10,7 +10,8 @@
   },
   "license": "MIT",
   "files": [
-    "src/generator.js",
+    "generator.js",
+    "index.js",
     "LICENSE",
     "README.md",
     "templates"
@@ -25,6 +26,7 @@
     "test": "mocha"
   },
   "dependencies": {
+    "generate-defaults": "^0.4.0",
     "is-valid-app": "^0.2.0"
   },
   "devDependencies": {

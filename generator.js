@@ -23,7 +23,7 @@ module.exports = function(app) {
    */
 
   app.task('default', ['babelrc']);
-  app.task('babelrc', { silent: true }, function (callback) {
+  app.task('babelrc', { silent: true }, function(callback) {
     app.questions.list('babel.stage', 'Which stage do you want to use?', {
       choices: [
         'stage-0',
@@ -48,11 +48,29 @@ module.exports = function(app) {
     });
     app.ask('babel', { save: false }, function(err, answers) {
       if (err) return callback(err);
-      console.log(answers);
+      var tmpldata = {
+        babel: {
+          presets: [],
+          dev: false,
+          prod: false,
+          test: false
+        }
+      };
+      tmpldata.babel.presets.push(answers.babel.stage);
+      if (answers.babel && answers.babel.presets) {
+        tmpldata.babel.presets = tmpldata.babel.presets.concat(answers.babel.presets);
+      }
+      if (answers.babel && answers.babel.env) {
+        tmpldata.babel.dev = answers.babel.env.indexOf('development') !== -1;
+        tmpldata.babel.prod = answers.babel.env.indexOf('production') !== -1;
+        tmpldata.babel.test = answers.babel.env.indexOf('test') !== -1;
+      }
+      app.data(tmpldata);
+      return app.src('templates/babelrc.tmpl', {cwd: __dirname})
+        .pipe(app.renderFile('*'))
+        .pipe(app.conflicts(app.cwd))
+        .pipe(app.dest(app.cwd));
       //app.build(answers.licenses, callback);
     });
-    // return app.src('templates/assemblefile.js', {cwd: __dirname})
-    //   .pipe(app.conflicts(app.cwd))
-    //   .pipe(app.dest(app.cwd));
   });
 };

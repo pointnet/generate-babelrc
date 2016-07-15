@@ -22,7 +22,7 @@
     "node": ">=4.0"
   },
   "scripts": {
-    "lint": "eslint ./src ./test",
+    "lint": "eslint ./*.js ./test",
     "test": "mocha"
   },
   "dependencies": {
@@ -38,31 +38,20 @@
     "npm-install-global": "^0.1.2"
   },
   "keywords": [
-    "assemblefile",
-    "boilerplate",
-    "build",
+    "babelrc",
     "cli",
     "cli-app",
     "command-line",
-    "create",
     "dev",
     "development",
     "framework",
-    "front",
-    "frontend",
     "generate",
     "generate-generator",
     "generate-plugin",
     "generategenerator",
     "generateplugin",
     "generator",
-    "init",
-    "initialize",
-    "new",
-    "node",
     "plugin",
-    "project",
-    "projects",
     "scaffold",
     "scaffolder",
     "scaffolding",

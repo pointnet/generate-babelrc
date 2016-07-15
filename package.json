@@ -68,7 +68,7 @@
   },
   "verb": {
     "toc": true,
-    "layout": "common-minimal",
+    "layout": "empty",
     "tasks": [
       "readme"
     ],
@@ -82,13 +82,12 @@
       ]
     },
     "reflinks": [
-      "generate",
-      "generate-dest",
-      "generate-install",
+      "assemble",
       "babel",
-      "gulp",
       "base",
-      "assemble"
+      "gulp",
+      "generate",
+      "generate-dest"
     ],
     "lint": {
       "reflinks": true

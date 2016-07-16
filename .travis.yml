@@ -1,6 +1,7 @@
 sudo: false
 language: node_js
 node_js:
+  - '6'
   - '5'
   - '4'
   - '0.12'
@@ -11,3 +12,7 @@ matrix:
     - node_js: '4'
     - node_js: '0.10'
     - node_js: '0.12'
+branches:
+  only:
+    - master
+    - develop

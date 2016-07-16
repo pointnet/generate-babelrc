@@ -6,8 +6,8 @@ var path = require('path');
 var assert = require('assert');
 var bddStdin = require('bdd-stdin');
 var generate = require('generate');
-var gm = require('global-modules');
 var npm = require('npm-install-global');
+var gm = require('global-modules');
 var del = require('delete');
 var generator = require('../');
 var app;
@@ -55,10 +55,19 @@ describe('generate-babelrc', function() {
   }
 
   beforeEach(function() {
-    app = generate({silent: true});
+    app = generate({ silent: true });
     app.cwd = actual();
     app.option('dest', actual());
     app.option('askWhen', 'not-answered');
+    // provide template data to avoid prompts
+    app.data(require('../package'));
+    app.data({
+      author: {
+        name: 'Aurelien Verla',
+        username: 'pointnet',
+        url: 'https://github.com/pointnet'
+      }
+    });
   });
 
 
@@ -85,17 +94,15 @@ describe('generate-babelrc', function() {
   });
 
   describe('tasks', function () {
-    beforeEach(function(cb) {
+    beforeEach(function() {
       app.use(generator);
-      bddStdin('\n', '\n', '\n');
-      cb();
     });
 
     it('should run the `default` task with .build', function(cb) {
+      bddStdin('\n', '\n', '\n');
       app.build('default', function () {
-        console.log('toto');
-        cb();
-        //exists('.babelrc', cb)
+        console.log('here');
+        exists('.babelrc', cb);
       });
     });
 

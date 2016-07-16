@@ -22,7 +22,7 @@
     "node": ">=4.0"
   },
   "scripts": {
-    "lint": "eslint ./*.js ./test",
+    "lint": "eslint ./*.js ./test/*.js",
     "test": "mocha --recursive ./**/*.test.js"
   },
   "dependencies": {

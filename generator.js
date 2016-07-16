@@ -22,9 +22,10 @@ module.exports = function(app) {
    * @api public
    */
 
-  app.task('default', ['babelrc']);
+  app.task('default', { silent: true }, ['babelrc']);
   app.task('babelrc', { silent: true }, function(callback) {
     app.questions.list('babel.stage', 'Which stage do you want to use?', {
+      default: 1,
       choices: [
         'stage-0',
         'stage-1',
@@ -66,11 +67,10 @@ module.exports = function(app) {
         tmpldata.babel.test = answers.babel.env.indexOf('test') !== -1;
       }
       app.data(tmpldata);
-      return app.src('templates/babelrc.tmpl', {cwd: __dirname})
+      return app.src('./templates/babelrc.tmpl', {cwd: __dirname})
         .pipe(app.renderFile('*'))
         .pipe(app.conflicts(app.cwd))
         .pipe(app.dest(app.cwd));
-      //app.build(answers.licenses, callback);
     });
   });
 };

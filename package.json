@@ -16,7 +16,7 @@
     "README.md",
     "templates"
   ],
-  "main": "src/generator.js",
+  "main": "generator.js",
   "preferGlobal": true,
   "engines": {
     "node": ">=4.0"

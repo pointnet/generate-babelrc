@@ -67,7 +67,7 @@ module.exports = function(app) {
         tmpldata.babel.test = answers.babel.env.indexOf('test') !== -1;
       }
       app.data(tmpldata);
-      return app.src('./templates/babelrc.tmpl', {cwd: __dirname})
+      app.src('./templates/babelrc.tmpl', {cwd: __dirname})
         .pipe(app.renderFile('*'))
         .pipe(app.conflicts(app.cwd))
         .pipe(app.dest(app.cwd))

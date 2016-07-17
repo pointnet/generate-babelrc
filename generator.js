@@ -35,7 +35,7 @@ module.exports = function(app) {
     });
     app.questions.choices('babel.presets', 'Which presets do you want to use?', {
       choices: [
-        'es2105',
+        'es2015',
         'es2016',
         'react'
       ]

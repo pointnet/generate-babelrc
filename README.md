@@ -1,6 +1,8 @@
-# generate-babelrc [![NPM version](https://img.shields.io/npm/v/generate-babelrc.svg?style=flat)](https://www.npmjs.com/package/generate-babelrc) [![NPM downloads](https://img.shields.io/npm/dm/generate-babelrc.svg?style=flat)](https://npmjs.org/package/generate-babelrc) [![Build Status](https://img.shields.io/travis/pointnet/generate-babelrc.svg?style=flat)](https://travis-ci.org/pointnet/generate-babelrc) [![Build status](https://ci.appveyor.com/api/projects/status/github/pointnet/generate-babelrc?svg=true)](https://ci.appveyor.com/project/pointnet/generate-babelrc) [![Coverage Status](https://img.shields.io/coveralls/pointnet/generate-babelrc.svg?style=flat)](https://coveralls.io/r/pointnet/generate-babelrc)
+# generate-babelrc [![NPM version](https://img.shields.io/npm/v/generate-babelrc.svg?style=flat)](https://www.npmjs.com/package/generate-babelrc) [![NPM downloads](https://img.shields.io/npm/dm/generate-babelrc.svg?style=flat)](https://npmjs.org/package/generate-babelrc)
 
-Generate an .babelrc file for [babel](https://babeljs.io/) in the current working directory or specified `--dest`.
+Generate an .babelrc file for babel in the current working directory or specified --dest.
+
+[![Build Status](https://img.shields.io/travis/pointnet/generate-babelrc.svg?style=flat)](https://travis-ci.org/pointnet/generate-babelrc) [![Build status](https://ci.appveyor.com/api/projects/status/github/pointnet/generate-babelrc?svg=true)](https://ci.appveyor.com/project/pointnet/generate-babelrc) [![Coverage Status](https://img.shields.io/coveralls/pointnet/generate-babelrc.svg?style=flat)](https://coveralls.io/r/pointnet/generate-babelrc)
 
 [![Dependency Status](https://david-dm.org/pointnet/generate-babelrc.svg)](https://david-dm.org/pointnet/generate-babelrc) [![devDependency Status](https://david-dm.org/pointnet/generate-babelrc/dev-status.svg)](https://david-dm.org/pointnet/generate-babelrc#info=devDependencies)
 

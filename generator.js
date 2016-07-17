@@ -70,7 +70,9 @@ module.exports = function(app) {
       return app.src('./templates/babelrc.tmpl', {cwd: __dirname})
         .pipe(app.renderFile('*'))
         .pipe(app.conflicts(app.cwd))
-        .pipe(app.dest(app.cwd));
+        .pipe(app.dest(app.cwd))
+        .on('error', callback)
+        .on('end', callback);
     });
   });
 };

@@ -2,6 +2,8 @@
 
 Generate an .babelrc file for [babel](https://babeljs.io/) in the current working directory or specified `--dest`.
 
+[![Dependency Status](https://david-dm.org/pointnet/generate-babelrc.svg)](https://david-dm.org/pointnet/generate-babelrc) [![devDependency Status](https://david-dm.org/pointnet/generate-babelrc/dev-status.svg)](https://david-dm.org/pointnet/generate-babelrc#info=devDependencies)
+
 ## Table of Contents
 
 - [What is "Generate"?](#what-is-generate)

@@ -28,7 +28,7 @@ branches:
   only:
     - master
     - develop
-    - realease/*
+    - /release.*/
 
 # Don't actually build.
 build: off

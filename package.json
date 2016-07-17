@@ -32,7 +32,7 @@
     "test:coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*.test.js"
   },
   "dependencies": {
-    "generate-defaults": "^0.4.0",
+    "generate-defaults": "^0.4.1",
     "is-valid-app": "^0.2.0"
   },
   "devDependencies": {
@@ -40,7 +40,7 @@
     "coveralls": "^2.11.11",
     "delete": "^0.3.2",
     "eslint": "^3.1.0",
-    "generate": "^0.9.5",
+    "generate": "^0.9.8",
     "global-modules": "^0.2.2",
     "gulp-format-md": "^0.1.9",
     "intercept-stdout": "^0.1.2",

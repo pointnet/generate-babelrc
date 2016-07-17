@@ -22,9 +22,14 @@
     "node": ">=4.0"
   },
   "scripts": {
-    "pretest": "npm run lint",
+    "clean": "npm run clean:actual && npm run clean:coverage",
+    "clean:actual": "rimraf ./test/actual",
+    "clean:coverage": "rimraf ./coverage",
     "lint": "eslint ./*.js ./test/*.js",
-    "test": "mocha --recursive ./**/*.test.js"
+    "pretest": "npm run clean:actual && npm run lint",
+    "test": "mocha ./test/*.test.js",
+    "pretest:coverage": "npm run clean && npm run lint",
+    "test:coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*.test.js"
   },
   "dependencies": {
     "generate-defaults": "^0.4.0",
@@ -32,14 +37,17 @@
   },
   "devDependencies": {
     "bdd-stdin": "^0.2.0",
+    "coveralls": "^2.11.11",
     "delete": "^0.3.2",
     "eslint": "^3.1.0",
     "generate": "^0.9.5",
     "global-modules": "^0.2.2",
     "gulp-format-md": "^0.1.9",
     "intercept-stdout": "^0.1.2",
+    "istanbul": "^0.4.4",
     "mocha": "^2.5.3",
-    "npm-install-global": "^0.1.2"
+    "npm-install-global": "^0.1.2",
+    "rimraf": "^2.5.3"
   },
   "keywords": [
     "babelrc",

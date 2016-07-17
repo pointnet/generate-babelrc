@@ -29,7 +29,8 @@ function symlink(dir, cb) {
 }
 
 function unlink(dir, cb) {
-  var name = path.basename(dir);
+  var src = path.resolve(dir);
+  var name = path.basename(src);
   var dest = path.resolve(gm, name);
   fs.unlink(dest, cb);
 }
@@ -154,11 +155,11 @@ describe('generate-babelrc', function() {
   if (!process.env.CI && !process.env.TRAVIS) {
     describe('generator (CLI)', function() {
       before(function(cb) {
-        symlink(__dirname, cb);
+        symlink('./', cb);
       });
 
       after(function(cb) {
-        unlink(__dirname, cb);
+        unlink('./', cb);
       });
 
       beforeEach(function() {

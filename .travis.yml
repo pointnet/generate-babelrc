@@ -1,0 +1,14 @@
+sudo: false
+language: node_js
+node_js:
+  - '6'
+  - '5'
+matrix:
+  fast_finish: true
+branches:
+  only:
+    - master
+    - develop
+    - /release.*/
+script: "npm run test:coverage"
+after_script: "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"

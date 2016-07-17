@@ -1,0 +1,12 @@
+---
+rename:
+  basename: .babelrc
+---
+{
+  "presets": ["<%= babel.presets.join('", "') %>"]<% if (babel.prod || babel.dev || babel.test) { %>,
+  "env": {<% if (babel.dev) { %>
+    "development": { "presets": ["<%= babel.presets.join('", "') %>"] }<%= babel.prod || babel.test ? ',' : '' %><% }%><% if (babel.prod) { %>
+    "production": { "presets": ["<%= babel.presets.join('", "') %>"], "comments": false }<%= babel.test ? ',' : '' %><% }%><% if (babel.test) { %>
+    "test": { "presets": ["<%= babel.presets.join('", "') %>"], "comments": false }<% } %>
+  }<% } %>
+}

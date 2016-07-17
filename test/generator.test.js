@@ -46,6 +46,20 @@ function exists(name, cb) {
   };
 }
 
+function existscontains(name, contains, cb) {
+  return function(err) {
+    if (err) return cb(err);
+    var filepath = actual(name);
+    fs.stat(filepath, function(err, stat) {
+      if (err) return cb(err);
+      assert(stat);
+      var json = JSON.parse(fs.readFileSync(filepath));
+      assert(contains(json));
+      del(actual(), cb);
+    });
+  };
+}
+
 var intercepted = false;
 var unhook_intercept = intercept(function(txt) {
   if (intercepted) {
@@ -165,19 +179,82 @@ describe('generate-babelrc', function() {
   describe('generator (API)', function() {
     beforeEach(function() {
       app.register('babelrc', generator);
-      bddStdin('\n', '\n', '\n');
     });
 
     it('should run the default task on the generator', function(cb) {
+      bddStdin('\n', '\n', '\n');
       app.generate('babelrc', exists('.babelrc', cb));
     });
 
     it('should run the `babelrc` task', function(cb) {
+      bddStdin('\n', '\n', '\n');
       app.generate('babelrc:babelrc', exists('.babelrc', cb));
     });
 
     it('should run the `default` task when defined explicitly', function(cb) {
+      bddStdin('\n', '\n', '\n');
       app.generate('babelrc:default', exists('.babelrc', cb));
+    });
+
+    it('should generate `presets` when defined explicitly', function(cb) {
+      bddStdin('\n', ' ', '\n', '\n');
+      app.generate(
+        'babelrc',
+        existscontains(
+          '.babelrc',
+          function(json) {
+            return json.presets.indexOf('es2015') !== -1
+              && json.presets.indexOf('es2016') !== -1
+              && json.presets.indexOf('react') !== -1;
+          },
+          cb
+        )
+      );
+    });
+
+    it('should generate `development` env when defined explicitly', function(cb) {
+      bddStdin('\n', '\n', bddStdin.keys.down, ' ', '\n', '\n');
+      app.generate(
+        'babelrc',
+        existscontains(
+          '.babelrc',
+          function(json) {
+            return json.hasOwnProperty('env')
+              && json.env.hasOwnProperty('development');
+          },
+          cb
+        )
+      );
+    });
+
+    it('should generate `production` env when defined explicitly', function(cb) {
+      bddStdin('\n', '\n', bddStdin.keys.down, bddStdin.keys.down, ' ', '\n', '\n');
+      app.generate(
+        'babelrc',
+        existscontains(
+          '.babelrc',
+          function(json) {
+            return json.hasOwnProperty('env')
+              && json.env.hasOwnProperty('production');
+          },
+          cb
+        )
+      );
+    });
+
+    it('should generate `test` env when defined explicitly', function(cb) {
+      bddStdin('\n', '\n', bddStdin.keys.down, bddStdin.keys.down, bddStdin.keys.down, ' ', '\n', '\n');
+      app.generate(
+        'babelrc',
+        existscontains(
+          '.babelrc',
+          function(json) {
+            return json.hasOwnProperty('env')
+              && json.env.hasOwnProperty('test');
+          },
+          cb
+        )
+      );
     });
   });
 

@@ -1,6 +1,6 @@
 {
   "name": "generate-babelrc",
-  "description": "Generate an .babelrc file for [babel] in the current working directory or specified `--dest`.",
+  "description": "Generate an .babelrc file for babel in the current working directory or specified --dest.",
   "version": "0.1.0",
   "homepage": "https://github.com/pointnet/generate-babelrc",
   "author": "Aurelien Verla (https://github.com/pointnet)",
@@ -19,7 +19,7 @@
   "main": "generator.js",
   "preferGlobal": true,
   "engines": {
-    "node": ">=4.0"
+    "node": ">=5.0"
   },
   "scripts": {
     "clean": "npm run clean:actual && npm run clean:coverage",

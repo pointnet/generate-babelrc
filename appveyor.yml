@@ -4,7 +4,6 @@ environment:
     # node.js
     - nodejs_version: "6.0"
     - nodejs_version: "5.0"
-    - nodejs_version: "4.0"
 
 # Configure matrix failures
 matrix:
@@ -29,6 +28,7 @@ branches:
   only:
     - master
     - develop
+    - realease/*
 
 # Don't actually build.
 build: off

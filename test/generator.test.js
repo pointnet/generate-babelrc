@@ -5,6 +5,7 @@ var fs = require('fs');
 var path = require('path');
 var assert = require('assert');
 var bddStdin = require('bdd-stdin');
+var intercept = require('intercept-stdout');
 var generate = require('generate');
 var npm = require('npm-install-global');
 var gm = require('global-modules');
@@ -34,18 +35,35 @@ function unlink(dir, cb) {
 }
 
 function exists(name, cb) {
-  return function (err) {
+  return function(err) {
     if (err) return cb(err);
     var filepath = actual(name);
-    console.log(filepath);
     fs.stat(filepath, function(err, stat) {
-    if (err) return cb(err);
-      console.log(stat);
+      if (err) return cb(err);
       assert(stat);
       del(actual(), cb);
     });
   };
 }
+
+var intercepted = false;
+var unhook_intercept = intercept(function(txt) {
+  if (intercepted) {
+    if (txt.indexOf('[?25h') === 1) {
+      intercepted = false;
+    }
+    return '';
+  } else {
+    if (txt.indexOf('Which stage do you want to use?') !== -1
+      || txt.indexOf('Which presets do you want to use?') !== -1
+      || txt.indexOf('Which environment do you want to use?') !== -1) {
+      intercepted = true;
+      return '';
+    } else {
+      return txt;
+    }
+  }
+});
 
 describe('generate-babelrc', function() {
   if (!process.env.CI && !process.env.TRAVIS) {
@@ -53,6 +71,10 @@ describe('generate-babelrc', function() {
       npm.maybeInstall('generate', cb);
     });
   }
+
+  after(function() {
+    unhook_intercept();
+  });
 
   beforeEach(function() {
     app = generate({ silent: true });
@@ -69,7 +91,6 @@ describe('generate-babelrc', function() {
       }
     });
   });
-
 
   describe('plugin', function() {
     it('should only register the plugin once', function(cb) {
@@ -93,32 +114,29 @@ describe('generate-babelrc', function() {
     });
   });
 
-  describe('tasks', function () {
+  describe('tasks', function() {
     beforeEach(function() {
       app.use(generator);
+      bddStdin('\n', '\n', '\n');
     });
 
     it('should run the `default` task with .build', function(cb) {
-      bddStdin('\n', '\n', '\n');
-      app.build('default', function () {
-        console.log('here');
-        exists('.babelrc', cb);
-      });
+      app.build('default', exists('.babelrc', cb));
     });
 
-    // it('should run the `default` task with .generate', function(cb) {
-    //   app.generate('default', exists('.babelrc', cb));
-    // });
+    it('should run the `default` task with .generate', function(cb) {
+      app.generate('default', exists('.babelrc', cb));
+    });
 
-    // it('should run the `babelrc` task with .build', function(cb) {
-    //   app.build('babelrc', exists('.babelrc', cb));
-    // });
+    it('should run the `babelrc` task with .build', function(cb) {
+      app.build('babelrc', exists('.babelrc', cb));
+    });
 
-    // it('should run the `babelrc` task with .generate', function(cb) {
-    //   app.generate('babelrc', exists('.babelrc', cb));
-    // });
+    it('should run the `babelrc` task with .generate', function(cb) {
+      app.generate('babelrc', exists('.babelrc', cb));
+    });
   });
-/*
+
   if (!process.env.CI && !process.env.TRAVIS) {
     describe('generator (CLI)', function() {
       before(function(cb) {
@@ -198,5 +216,5 @@ describe('generate-babelrc', function() {
       app.generate('foo.bar.baz', exists('.babelrc', cb));
     });
   });
-  */
+
 });

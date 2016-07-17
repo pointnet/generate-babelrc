@@ -27,7 +27,6 @@ test_script:
 branches:
   only:
     - master
-    - develop
     - /release.*/
 
 # Don't actually build.

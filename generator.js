@@ -37,6 +37,8 @@ module.exports = function(app) {
       choices: [
         'es2015',
         'es2016',
+        'es2017',
+        'env',
         'react'
       ]
     });
